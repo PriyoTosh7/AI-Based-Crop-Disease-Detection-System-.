@@ -17,15 +17,19 @@ tasks = Array.from({ length: 3 }, (_, i) => Array.isArray(tasks) && tasks[i] ===
 let route = 'dashboard', filter = 'all', query = '', file = null, preview = '', result = null;
 let analyzing = false, runId = 0, uploadId = 0, lastFocus = null;
 let selection = DISEASES[0].id, fieldNote = '';
-let analysisMode = safeStore.get('cc-analysis-mode', 'single_leaf');
-if (!['single_leaf', 'multi_region'].includes(analysisMode)) analysisMode = 'single_leaf';
 const L = (en, bn) => lang === 'bn' ? bn : en;
 const A = value => value[lang === 'bn' ? 1 : 0];
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const n = value => new Intl.NumberFormat(lang === 'bn' ? 'bn-BD' : 'en-US').format(value);
 const date = value => new Intl.DateTimeFormat(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Dhaka' }).format(new Date(value));
 const projectTitle = () => 'AI-Based Crop Disease Detection and Smart Farming Assistance System';
-const API_BASE = String(window.CROPCARE_API_BASE || window.location.origin).replace(/\/+$/, '');
+
+const API_BASE =
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8000'
+    : 'https://plantvillage-ai-api.onrender.com';
+
 let historyPageNumber = 1;
 const HISTORY_PAGE_SIZE = 10;
 const icons = {
@@ -117,7 +121,7 @@ function diagnose() {
       <section class="panel">
         <div class="panel-head">
           <h2>${L('01 · Upload a crop leaf image', '০১ · ফসলের পাতার ছবি আপলোড করুন')}</h2>
-          <span class="badge neutral">${icon('shield')}${L('Original upload not retained', 'মূল আপলোড স্থায়ীভাবে রাখা হয় না')}</span>
+          <span class="badge neutral">${icon('shield')}${L('Private upload', 'নিরাপদ আপলোড')}</span>
         </div>
         <div class="upload-zone" id="dropzone">
           ${preview
@@ -133,15 +137,7 @@ function diagnose() {
           ${btn(L('Use camera', 'ক্যামেরা ব্যবহার করুন'), 'camera', 'outline', 'camera')}
         </div>
         <div class="field">
-          <label class="small-label" for="analysis-mode">${L('02 · Image analysis mode', '০২ · ছবির বিশ্লেষণ পদ্ধতি')}</label>
-          <select class="input" id="analysis-mode">
-            <option value="single_leaf" ${analysisMode === 'single_leaf' ? 'selected' : ''}>${L('Single leaf (recommended)', 'একটি পাতা (প্রস্তাবিত)')}</option>
-            <option value="multi_region" ${analysisMode === 'multi_region' ? 'selected' : ''}>${L('Whole plant / multiple leaves (experimental)', 'পুরো গাছ / একাধিক পাতা (পরীক্ষামূলক)')}</option>
-          </select>
-          <small class="muted">${L('Multi-region mode scans overlapping image crops. It is experimental and is not a validated leaf detector.', 'Multi-region Mode ছবির একাধিক অংশ পরীক্ষা করে। এটি পরীক্ষামূলক; যাচাইকৃত Leaf Detector নয়।')}</small>
-        </div>
-        <div class="field">
-          <label class="small-label" for="field-note">${L('03 · Field notes', '০৩ · মাঠের পর্যবেক্ষণ')} <span class="muted">${L('(optional)', '(ঐচ্ছিক)')}</span></label>
+          <label class="small-label" for="field-note">${L('02 · Field notes', '০২ · মাঠের পর্যবেক্ষণ')} <span class="muted">${L('(optional)', '(ঐচ্ছিক)')}</span></label>
           <textarea id="field-note" rows="2" maxlength="500" placeholder="${L('Crop name, location or symptoms you observed…', 'ফসলের নাম, স্থান বা যে লক্ষণ দেখেছেন…')}">${esc(fieldNote)}</textarea>
         </div>
         <div class="field">
@@ -189,9 +185,6 @@ function resultHTML(record) {
       <div class="ai-prediction-head"><strong>${item.rank}. ${esc(item.label)}</strong><b>${Number(item.confidence_percent).toFixed(2)}%</b></div>
       <div class="ai-progress"><span style="width:${Math.max(0, Math.min(100, Number(item.confidence_percent)))}%"></span></div>
     </div>`).join('');
-  const regionBlock = ai.analysis_mode === 'multi_region_experimental'
-    ? `<div class="result-block"><h3>${L('Experimental region-level predictions', 'পরীক্ষামূলক Region-level Prediction')}</h3><p class="muted">${L('These are overlapping image crops, not detected leaf objects.', 'এগুলো ছবির Overlapping Crop; আলাদা শনাক্ত করা পাতা নয়।')}</p>${list(ai.region_predictions).map(item => `<div class="ai-prediction-row"><div class="ai-prediction-head"><strong>${L('Region', 'অঞ্চল')} ${Number(item.region)} · ${esc(item.label)}</strong><b>${Number(item.confidence_percent).toFixed(2)}%</b></div></div>`).join('')}</div>`
-    : '';
   const infoBlock = background
     ? `<div class="notice amber"><h3>${L('Please upload a clear plant leaf photo', 'অনুগ্রহ করে পাতার পরিষ্কার ছবি দিন')}</h3><p>${L('The model selected its Background_without_leaves class. No disease name or treatment recommendation is issued for this image.', 'মডেল Background_without_leaves ক্লাস নির্বাচন করেছে। এই ছবির জন্য কোনো রোগের নাম বা চিকিৎসা পরামর্শ দেওয়া হচ্ছে না।')}</p></div>`
     : `<div class="ai-info-grid">
@@ -220,12 +213,9 @@ function resultHTML(record) {
       <p>${esc(info.type || ai.reliability_status || '')}</p>
       <div class="ai-confidence">${Number(ai.confidence_percent || 0).toFixed(2)}<small>%</small></div>
       <p class="muted">${L('Top-1 softmax score', 'Top-1 Softmax Score')} · ${L('Confidence margin', 'Confidence Margin')}: ${Number(ai.confidence_margin || 0).toFixed(2)} ${L('points', 'পয়েন্ট')}</p>
-      <p class="muted">${L('Background class score', 'Background Class Score')}: ${Number(ai.background_probability_percent || 0).toFixed(2)}%</p>
-      ${ai.analysis_mode === 'multi_region_experimental' ? `<div class="notice amber">${L('Experimental multi-region scan:', 'পরীক্ষামূলক Multi-region Scan:')} ${Number(ai.region_count || 0)} ${L('overlapping crops were evaluated. This is not a validated whole-plant detector.', 'টি overlapping crop পরীক্ষা করা হয়েছে। এটি যাচাইকৃত Whole-plant Detector নয়।')}</div>` : ''}
     </div>
     ${uncertain ? `<div class="notice amber">${L('The prediction did not meet the project’s provisional confidence and margin review thresholds. Retake the image or seek expert confirmation.', 'পূর্বাভাসটি প্রকল্পের প্রাথমিক Confidence ও Margin যাচাইয়ের সীমা পূরণ করেনি। নতুন ছবি তুলুন বা বিশেষজ্ঞের পরামর্শ নিন।')}</div>` : ''}
     <div class="result-block"><h3>${L('Top-5 model predictions', 'Top-5 Model Prediction')}</h3>${top}</div>
-    ${regionBlock}
     ${infoBlock}
     ${gradcamBlock}
     <div class="ai-save-status">
@@ -551,10 +541,6 @@ function acceptFile(f) {
 }
 function bindUpload() {
   ['image-input', 'camera-input'].forEach(id => $('#' + id).addEventListener('change', e => acceptFile(e.target.files[0])));
-  $('#analysis-mode')?.addEventListener('change', e => {
-    analysisMode = ['single_leaf', 'multi_region'].includes(e.target.value) ? e.target.value : 'single_leaf';
-    safeStore.set('cc-analysis-mode', analysisMode);
-  });
   const zone = $('#dropzone');
   ['dragover', 'dragenter'].forEach(type => zone.addEventListener(type, e => { e.preventDefault(); zone.classList.add('dragging'); }));
   ['dragleave', 'drop'].forEach(type => zone.addEventListener(type, e => { e.preventDefault(); zone.classList.remove('dragging'); }));
@@ -593,7 +579,6 @@ async function analyze() {
   try {
     const form = new FormData();
     form.append('file', file, file.name || 'crop-image.jpg');
-    form.append('analysis_mode', analysisMode);
 
     const response = await fetch(`${API_BASE}/api/v1/predict`, {
       method: 'POST',
@@ -648,7 +633,7 @@ async function analyze() {
     analyzing = false;
     if (token === runId && route === 'diagnose') {
       const panelNow = $('#result-panel');
-      if (panelNow) panelNow.innerHTML = `<div class="notice amber"><h3>${L('Could not complete AI analysis', 'AI বিশ্লেষণ সম্পন্ন হয়নি')}</h3><p>${esc(error.message)}</p><p>${L('Check the public API health endpoint and confirm the trained model artifact is configured.', 'Public API Health এবং Trained Model Artifact-এর Configuration পরীক্ষা করুন।')}</p></div>`;
+      if (panelNow) panelNow.innerHTML = `<div class="notice amber"><h3>${L('Could not complete AI analysis', 'AI বিশ্লেষণ সম্পন্ন হয়নি')}</h3><p>${esc(error.message)}</p><p>${L('Check that the FastAPI backend is running on port 8000 and the trained checkpoint is installed.', 'FastAPI Backend Port 8000-এ চালু আছে এবং Trained Checkpoint ঠিক জায়গায় আছে কি না দেখুন।')}</p></div>`;
       $('[data-action="analyze"]')?.removeAttribute('disabled');
     }
   }
