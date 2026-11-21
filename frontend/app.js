@@ -24,11 +24,18 @@ const n = value => new Intl.NumberFormat(lang === 'bn' ? 'bn-BD' : 'en-US').form
 const date = value => new Intl.DateTimeFormat(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Dhaka' }).format(new Date(value));
 const projectTitle = () => 'AI-Based Crop Disease Detection and Smart Farming Assistance System';
 
-const API_BASE =
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1'
-    ? 'http://127.0.0.1:8000'
-    : 'https://plantvillage-ai-api.onrender.com';
+const API_BASE = (() => {
+  const configured = String(window.CROPCARE_API_BASE || '').trim().replace(/\/+$/, '');
+  if (configured) return configured;
+
+  // When the frontend is opened through a local static dev server (for example :5501),
+  // send API requests to the local FastAPI server. In production, use the same origin.
+  const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  if (isLocalHost && window.location.port && window.location.port !== '8000') {
+    return 'http://127.0.0.1:8000';
+  }
+  return '';
+})();
 
 let historyPageNumber = 1;
 const HISTORY_PAGE_SIZE = 10;
@@ -633,7 +640,7 @@ async function analyze() {
     analyzing = false;
     if (token === runId && route === 'diagnose') {
       const panelNow = $('#result-panel');
-      if (panelNow) panelNow.innerHTML = `<div class="notice amber"><h3>${L('Could not complete AI analysis', 'AI বিশ্লেষণ সম্পন্ন হয়নি')}</h3><p>${esc(error.message)}</p><p>${L('Check that the FastAPI backend is running on port 8000 and the trained checkpoint is installed.', 'FastAPI Backend Port 8000-এ চালু আছে এবং Trained Checkpoint ঠিক জায়গায় আছে কি না দেখুন।')}</p></div>`;
+      if (panelNow) panelNow.innerHTML = `<div class="notice amber"><h3>${L('Could not complete AI analysis', 'AI বিশ্লেষণ সম্পন্ন হয়নি')}</h3><p>${esc(error.message)}</p><p>${L('Check that the backend API is reachable and the trained model checkpoint is configured on the server.', 'Backend API চালু আছে এবং সার্ভারে Trained Model Checkpoint সঠিকভাবে কনফিগার করা আছে কি না দেখুন।')}</p></div>`;
       $('[data-action="analyze"]')?.removeAttribute('disabled');
     }
   }
