@@ -1,0 +1,10 @@
+Parameter,Value
+Model,EfficientNet-B3
+Dataset,PlantVillage
+Total Classes,39
+Training Images,43030
+Validation Images,9213
+Testing Images,9243
+Input Image Size,300 x 300
+Batch Size,32
+Fine Tuning,Enabled

@@ -1,0 +1,11 @@
+Metric,Value
+Test Accuracy (%),98.86400519311913
+Macro Precision (%),98.61874361127684
+Macro Recall (%),98.65719710899089
+Macro F1-Score (%),98.62640286980195
+Weighted Precision (%),98.88747217279223
+Weighted Recall (%),98.86400519311913
+Weighted F1-Score (%),98.86588222383608
+ECE,0.002890762703818294
+Brier Score,0.018184505320630352
+Negative Log-Likelihood,0.03607483790440914

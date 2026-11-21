@@ -1,0 +1,30 @@
+# Secrets and local environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+
+# Training data and generated datasets
+dataset/
+Plant_leave_diseases_dataset_with_augmentation/
+*.zip
+
+# Large trained model artifacts (GitHub blocks files over 100 MB)
+*.pth
+*.pt
+*.ckpt
+checkpoints/*
+!checkpoints/README.md
+outputs/model_export/*.pth
+
+# Runtime outputs
+backend/storage/gradcam/*
+!backend/storage/gradcam/.gitkeep
+*.log
+.DS_Store
+Thumbs.db

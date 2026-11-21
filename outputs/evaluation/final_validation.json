@@ -1,0 +1,24 @@
+{
+  "Model": "EfficientNet-B3",
+  "Test Accuracy": 98.864,
+  "Macro Precision": 98.6187,
+  "Macro Recall": 98.6572,
+  "Macro F1": 98.6264,
+  "Total Classes Evaluated": 39,
+  "Lowest Class Recall (%)": 91.3333,
+  "Weakest 5 Classes": {
+    "Corn___Northern_Leaf_Blight": 91.3333,
+    "Tomato___Early_blight": 91.3333,
+    "Tomato___Spider_mites Two-spotted_spider_mite": 93.254,
+    "Corn___Cercospora_leaf_spot Gray_leaf_spot": 95.3333,
+    "Tomato___Late_blight": 95.8188
+  },
+  "Background Analysis": {
+    "False Background Predictions": 0,
+    "Non-Background Test Images": 9071,
+    "False Background Rate (%)": 0.0,
+    "Actual Background Images": 172,
+    "Correct Background Predictions": 172,
+    "Background Recall (%)": 100.0
+  }
+}

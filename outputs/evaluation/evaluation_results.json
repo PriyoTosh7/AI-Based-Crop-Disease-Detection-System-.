@@ -1,0 +1,21 @@
+{
+  "Model": "EfficientNet-B3",
+  "Total Classes": 39,
+  "Test Images": 9243,
+  "Test Accuracy (%)": 98.864,
+  "Macro Precision (%)": 98.6187,
+  "Macro Recall (%)": 98.6572,
+  "Macro F1 Score (%)": 98.6264,
+  "Weighted Precision (%)": 98.8875,
+  "Weighted Recall (%)": 98.864,
+  "Weighted F1 Score (%)": 98.8659,
+  "Device": "recorded evaluation device: CUDA",
+  "Background Analysis": {
+    "False Background Predictions": 0,
+    "Non-Background Test Images": 9071,
+    "False Background Rate (%)": 0.0,
+    "Actual Background Images": 172,
+    "Correct Background Predictions": 172,
+    "Background Recall (%)": 100.0
+  }
+}

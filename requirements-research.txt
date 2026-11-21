@@ -1,0 +1,8 @@
+-r requirements.txt
+
+# Optional dataset evaluation, figures and notebook work
+pandas>=2.2
+scikit-learn>=1.5
+matplotlib>=3.9
+tqdm>=4.66
+jupyter>=1.1

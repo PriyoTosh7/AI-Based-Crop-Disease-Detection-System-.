@@ -1,0 +1,6 @@
+Rank,Predicted_Class,Softmax_Score,Confidence_Percentage
+1,Strawberry___Leaf_scorch,0.9450251,94.50251
+2,Tomato___Septoria_leaf_spot,0.026874976,2.6874976
+3,Tomato___Early_blight,0.015343632,1.5343632
+4,Grape___Black_rot,0.0076556443,0.76556444
+5,Background_without_leaves,0.0019543464,0.19543464

@@ -1,0 +1,56 @@
+
+PLANTVILLAGE-AI
+FINAL RESEARCH RESULTS AND DISCUSSION
+=====================================
+
+MODEL:
+EfficientNet-B3
+
+DATASET:
+PlantVillage
+
+TOTAL CLASSES:
+39
+
+DATASET DISTRIBUTION:
+Training Images: 43030
+Validation Images: 9213
+Testing Images: 9243
+
+MODEL PERFORMANCE:
+Test Accuracy: 98.86%
+
+Macro Precision: 98.62%
+Macro Recall: 98.66%
+Macro F1-Score: 98.63%
+
+Weighted Precision: 98.89%
+Weighted Recall: 98.86%
+Weighted F1-Score: 98.87%
+
+CALIBRATION:
+ECE: 0.00289
+Brier Score: 0.01818
+NLL: 0.03607
+
+DISCUSSION:
+The EfficientNet-B3 model was evaluated
+on 9,243 test images across 39 classes.
+
+The model achieved a test accuracy of
+98.86%.
+
+Calibration evaluation produced an ECE
+of 0.00289, a Brier Score of
+0.01818, and an NLL of
+0.03607.
+
+These results indicate strong predictive
+performance on the PlantVillage test split.
+
+Further external dataset validation is
+required to evaluate generalization
+under real-world conditions.
+
+=====================================
+END OF REPORT

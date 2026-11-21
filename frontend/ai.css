@@ -1,0 +1,74 @@
+/* AI research application additions; keeps the supplied CropCare visual system. */
+.ai-note { margin-bottom: 14px; }
+.ai-service-status { margin: 12px 0 18px; padding: 12px 15px; border: 1px solid #d7dfeb; border-radius: 10px; background: #f5f8fd; color: #405575; font-size: 13px; }
+.ai-service-status.online { border-color: #a7d9bd; background: #effaf3; color: #17633b; }
+.ai-service-status.offline { border-color: #edc7a4; background: #fff7ed; color: #9a4d10; }
+.ai-model-foot { font-size: 12px; line-height: 1.7; margin-top: 12px; }
+.ai-result-main { padding: 18px 0 20px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+.ai-result-main h2 { font-size: 25px; margin: 7px 0; color: #172554; overflow-wrap: anywhere; }
+.ai-result-main > p { color: var(--muted); }
+.ai-confidence { font-size: 48px; line-height: 1.15; font-weight: 800; color: #1d4ed8; margin-top: 15px; }
+.ai-confidence small { font-size: 19px; margin-left: 3px; }
+.badge.warning { background: #fff4df; color: #8b5a12; border-color: #f1d8a7; }
+.badge.success { background: #eaf8ef; color: #17633b; border-color: #b8e1c7; }
+.ai-prediction-row { margin: 15px 0; }
+.ai-prediction-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 7px; }
+.ai-prediction-head strong { overflow-wrap: anywhere; }
+.ai-prediction-head b { white-space: nowrap; color: #1d4ed8; }
+.ai-progress { height: 9px; background: #e6ebf3; border-radius: 30px; overflow: hidden; }
+.ai-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#6d91d1,#1d4ed8); }
+.ai-info-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; margin-top: 20px; }
+.ai-info-grid > div { padding: 15px; border: 1px solid var(--line); border-radius: 11px; background: #fbfcff; min-width: 0; }
+.ai-info-grid h3, .ai-gradcam h3 { font-size: 16px; margin-bottom: 8px; color: #20365e; }
+.ai-info-grid ul { padding-left: 20px; }
+.ai-info-grid li { font-size: 13px; line-height: 1.8; margin: 5px 0; color: #52617a; }
+.ai-gradcam { margin-top: 23px; padding-top: 20px; border-top: 1px solid var(--line); }
+.ai-gradcam > p { color: #65738b; font-size: 13px; line-height: 1.8; margin-bottom: 13px; }
+.ai-gradcam-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.ai-gradcam-grid figure { margin: 0; min-width: 0; background: #f2f5fa; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.ai-gradcam-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.ai-gradcam-grid figcaption { padding: 8px; font-size: 12px; color: #4c5e7a; text-align: center; }
+.ai-save-status { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 18px; padding: 11px 13px; background: #eff6ff; border-radius: 9px; color: #25436f; font-size: 12px; }
+.ai-overview-panel { margin-bottom: 20px; }
+.ai-status-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin-bottom: 18px; }
+.ai-status-grid > div, .research-metric-grid > div { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #f8faff; min-width: 0; }
+.ai-status-grid small, .research-metric-grid small { display: block; color: #64748b; font-size: 12px; margin-bottom: 5px; }
+.ai-status-grid b, .research-metric-grid b { display: block; color: #1e3a8a; font-size: 16px; overflow-wrap: anywhere; }
+.history-filters { display: grid; grid-template-columns: minmax(180px,2fr) repeat(2,minmax(130px,1fr)); gap: 12px; margin-bottom: 18px; align-items: end; }
+.history-filters label { display: grid; gap: 5px; color: #64748b; font-size: 12px; }
+.history-table-wrap { overflow-x: auto; }
+.ai-history-table { width: 100%; min-width: 700px; border-collapse: collapse; }
+.ai-history-table th, .ai-history-table td { padding: 12px 13px; border-bottom: 1px solid var(--line); text-align: left; font-size: 13px; }
+.ai-history-table th { color: #1e3a8a; background: #f5f8fd; }
+.ai-history-table td { color: #475569; }
+.ai-history-table td:first-child { font-weight: 700; color: #1e3a8a; }
+.history-confidence { font-weight: 700; color: #17633b !important; }
+.history-pagination { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 16px; color: #64748b; font-size: 13px; }
+.history-pagination > div { display: flex; gap: 8px; }
+.history-distribution { display: grid; gap: 14px; }
+.distribution-row { display: grid; gap: 6px; }
+.distribution-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: #475569; }
+.distribution-head span { overflow-wrap: anywhere; }
+.distribution-head b { color: #1e40af; }
+.distribution-track { height: 10px; border-radius: 20px; background: #e6ebf3; overflow: hidden; }
+.distribution-track span { display: block; height: 100%; background: linear-gradient(90deg,#86a5d9,#1d4ed8); border-radius: inherit; }
+.research-metric-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+.research-figure-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.research-figure-grid figure { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #f8faff; }
+.research-figure-grid img { width: 100%; height: 260px; object-fit: contain; display: block; background: #fff; }
+.research-figure-grid figcaption { padding: 10px 13px; color: #334b74; font-size: 13px; font-weight: 700; }
+@media(max-width:900px) {
+  .ai-status-grid, .research-metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .history-filters { grid-template-columns: 1fr 1fr; }
+  .history-filters input[type=search] { grid-column: 1/-1; }
+}
+@media(max-width:700px) {
+  .ai-info-grid, .research-figure-grid { grid-template-columns: 1fr; }
+  .ai-gradcam-grid { grid-template-columns: 1fr; }
+  .ai-gradcam-grid img { aspect-ratio: 4/3; }
+  .history-filters { grid-template-columns: 1fr; }
+  .history-filters input[type=search] { grid-column: auto; }
+  .ai-status-grid, .research-metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .history-pagination { align-items: flex-start; }
+  .ai-confidence { font-size: 40px; }
+}

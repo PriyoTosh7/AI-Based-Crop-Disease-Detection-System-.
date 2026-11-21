@@ -1,0 +1,40 @@
+Class,Correct,Incorrect,Total,Recall (%),Precision (%),F1 (%)
+Corn___Northern_Leaf_Blight,137,13,150,91.3333,95.8042,93.5154
+Tomato___Early_blight,137,13,150,91.3333,93.1973,92.2559
+Tomato___Spider_mites Two-spotted_spider_mite,235,17,252,93.254,98.7395,95.9184
+Corn___Cercospora_leaf_spot Gray_leaf_spot,143,7,150,95.3333,91.6667,93.4641
+Tomato___Late_blight,275,12,287,95.8188,99.278,97.5177
+Tomato___Target_Spot,206,6,212,97.1698,89.5652,93.2127
+Potato___Early_blight,146,4,150,97.3333,99.3197,98.3165
+Tomato___Septoria_leaf_spot,261,6,267,97.7528,97.7528,97.7528
+"Pepper,_bell___Bacterial_spot",147,3,150,98.0,100.0,98.9899
+Tomato___Leaf_Mold,148,2,150,98.6667,97.3684,98.0132
+Tomato___Tomato_mosaic_virus,148,2,150,98.6667,99.3289,98.9967
+Tomato___Bacterial_spot,316,4,320,98.75,98.75,98.75
+Tomato___healthy,238,2,240,99.1667,97.1429,98.1443
+Potato___healthy,149,1,150,99.3333,99.3333,99.3333
+Potato___Late_blight,149,1,150,99.3333,95.5128,97.3856
+Apple___Apple_scab,149,1,150,99.3333,100.0,99.6656
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot),161,1,162,99.3827,98.773,99.0769
+Strawberry___Leaf_scorch,166,1,167,99.4012,100.0,99.6997
+Blueberry___healthy,225,1,226,99.5575,99.5575,99.5575
+Apple___healthy,247,1,248,99.5968,100.0,99.798
+Soybean___healthy,761,3,764,99.6073,99.6073,99.6073
+Tomato___Tomato_Yellow_Leaf_Curl_Virus,802,3,805,99.6273,99.8755,99.7512
+Orange___Haunglongbing_(Citrus_greening),826,1,827,99.8791,100.0,99.9395
+Grape___healthy,150,0,150,100.0,100.0,100.0
+Apple___Black_rot,150,0,150,100.0,100.0,100.0
+Grape___Esca_(Black_Measles),208,0,208,100.0,100.0,100.0
+Grape___Black_rot,177,0,177,100.0,99.4382,99.7183
+Corn___healthy,175,0,175,100.0,100.0,100.0
+Corn___Common_rust,180,0,180,100.0,100.0,100.0
+Background_without_leaves,172,0,172,100.0,100.0,100.0
+Cherry___Powdery_mildew,159,0,159,100.0,100.0,100.0
+Cherry___healthy,150,0,150,100.0,98.6842,99.3377
+Strawberry___healthy,150,0,150,100.0,99.3377,99.6678
+Squash___Powdery_mildew,276,0,276,100.0,100.0,100.0
+Raspberry___healthy,150,0,150,100.0,100.0,100.0
+"Pepper,_bell___healthy",223,0,223,100.0,98.6726,99.3318
+Peach___healthy,150,0,150,100.0,100.0,100.0
+Peach___Bacterial_spot,346,0,346,100.0,99.4253,99.7118
+Apple___Cedar_apple_rust,150,0,150,100.0,100.0,100.0

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: cropcare-ai-demo
+    runtime: docker
+    plan: standard
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: PV_CHECKPOINT_URL
+        sync: false
+      - key: PV_CHECKPOINT_SHA256
+        value: 93625042ede1533f3a3cb563fe1432f3c3460532cf9cbbffe3bf9c269633dc4e
+      - key: PV_CHECKPOINT_PATH
+        value: /tmp/cropcare-model/best_finetuned_efficientnet_b3.pth
+      - key: MAX_UPLOAD_MB
+        value: "10"
+      - key: TORCH_NUM_THREADS
+        value: "2"

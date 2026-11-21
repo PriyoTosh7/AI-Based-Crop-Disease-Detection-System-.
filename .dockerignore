@@ -1,0 +1,16 @@
+.git
+.vscode
+*.zip
+.github
+.venv
+venv
+__pycache__
+.pytest_cache
+.env
+*.pth
+*.pt
+*.ckpt
+dataset
+Plant_leave_diseases_dataset_with_augmentation
+backend/storage/gradcam/*
+!backend/storage/gradcam/.gitkeep

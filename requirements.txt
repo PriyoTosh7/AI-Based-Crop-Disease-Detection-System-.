@@ -1,0 +1,19 @@
+# Web application
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+
+# Database
+SQLAlchemy>=2.0
+psycopg[binary]>=3.2
+python-dotenv>=1.0
+
+# Images and numerical operations
+Pillow>=10.0
+numpy>=1.26
+
+# Deep learning
+# If CUDA is required, install the matching PyTorch/torchvision build from pytorch.org
+# before installing this file. Do not replace a working CUDA build with CPU wheels.
+torch>=2.5
+torchvision>=0.20
